@@ -10,7 +10,7 @@ game.PlayScreen = me.ScreenObject.extend({
 //                this adds the player to the world
                 var player = me.pool.pull("player", 0, 420, {});
                 me.game.world.addChild(player, 5);
-//                this binds the key to press so the champion moves
+//                this binds the key to press so the champion moves around
                 me.input.bindKey(me.input.KEY.RIGHT, "right");
                 me.input.bindKey(me.input.KEY.LEFT, "left");
 
