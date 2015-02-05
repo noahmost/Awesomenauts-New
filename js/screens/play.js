@@ -7,7 +7,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.score = 0;
 //                this loads the level
                 me.levelDirector.loadLevel("level01");
-                
+//                this adds the player to the world
                 var player = me.pool.pull("player", 0, 420, {});
                 me.game.world.addChild(player, 5);
 

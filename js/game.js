@@ -40,7 +40,7 @@ var game = {
 
 	// Run on game resources loaded.
 	"loaded" : function () {
-            
+//            this registers the player so he is in the map
                 me.pool.register("player", game.PlayerEntity, true);
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
