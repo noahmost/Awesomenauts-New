@@ -10,7 +10,7 @@ game.PlayScreen = me.ScreenObject.extend({
 //                this adds the player to the world
                 var player = me.pool.pull("player", 0, 420, {});
                 me.game.world.addChild(player, 5);
-                
+//                set variable game manager
                 var gamemanager = me.pool.pull("GameManager", 0, 0, {});
                 me.game.world.addChild(gamemanager, 0);
                 

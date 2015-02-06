@@ -225,7 +225,7 @@ game.EnemyCreep = me.Entity.extend({
         
     }
 });
-
+//made entties gamemanager
 game.GameManager = Object.extend({
    init: function(x,y,settings){
      this.now = new Date().getTime();
