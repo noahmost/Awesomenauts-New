@@ -45,6 +45,7 @@ var game = {
 //                these add the base entities
                 me.pool.register("PlayerBase", game.PlayerBaseEntity);
                 me.pool.register("EnemyBase", game.EnemyBaseEntity);
+//                adds the creep
                 me.pool.register("EnemyCreep", game.EnemyCreep, true);
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

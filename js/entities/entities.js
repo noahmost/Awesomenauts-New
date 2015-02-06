@@ -211,12 +211,13 @@ game.EnemyCreep = me.Entity.extend({
                     return (new me.Rect(0, 0, 32, 64)).toPolygon();
                 }
         }]);
+//    this sets the health
     this.health =10;
     this.alwaysUpdate = true;
     this.setVelocity(3,20);
     
     this.type = "EnemyCreep";
-    
+//    sets walk animation
     this.renderable.addAnimation("walk" [3, 4, 5], 80);
     this.renderable.setCurrentAnimation("walk");
     },
