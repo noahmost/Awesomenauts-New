@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend ({
                 }]);
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
+//            this follows the position of the character
             me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
             
             this.renderable.addAnimation("idle", [78]);
@@ -114,12 +115,13 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.body.onCollision = this.onCollision.bind(this);
         
         this.type = "EnemyBaseEntity";
-        
+//        this sets the tower to not be burning
         this.renderable.addAnimation("idle", [0]);
         this.renderable.addAnimation("broken", [1]);
         this.renderable.setCurrentAnimation("idle");
     },
     update:function(delta){
+//        if the tower is deaded then burn it
         if(this.health<=0){
             this.broken = true;
             this.renderable.setCurrentAnimation("broken");

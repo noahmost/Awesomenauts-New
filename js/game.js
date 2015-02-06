@@ -42,6 +42,7 @@ var game = {
 	"loaded" : function () {
 //            this registers the player so he is in the map
                 me.pool.register("player", game.PlayerEntity, true);
+//                these add the base entities
                 me.pool.register("PlayerBase", game.PlayerBaseEntity);
                 me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		me.state.set(me.state.MENU, new game.TitleScreen());
