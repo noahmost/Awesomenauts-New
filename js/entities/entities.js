@@ -41,6 +41,13 @@ game.PlayerEntity = me.Entity.extend ({
             else{
                 this.body.vel.x=0;
             }
+            
+            if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
+                this.jumping = true;
+                this.body.vel.y -= this.body.accel.y * me.timer.tick;
+            }
+            
+            
 //                       if the a key is pressed then play attack animation 
                     if(me.input.isKeyPressed("attack")){
                 if(!this.renderable.isCurrentAnimation("attack")){
@@ -78,7 +85,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
         }]);
 //    these are variables that are used later
@@ -119,7 +126,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
         }]);
         this.broken = false;
