@@ -87,6 +87,7 @@ game.PlayerEntity = me.Entity.extend ({
                         this.body.falling = false;
                         this.body.vel.y = -1;
                     }
+//                    we can no longer jump onto towers
                     else if(xdif>-35 && this.facing === 'right' && (xdif<0) && ydif>-50){
                         this.body.vel.x = 0;
                         this.pos.x = this.pos.x -1;
