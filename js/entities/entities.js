@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend ({
                 }]);
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
+            me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
             
             this.renderable.addAnimation("idle", [78]);
             this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 123, 124, 125], 80);
@@ -73,11 +74,16 @@ game.PlayerBaseEntity = me.Entity.extend({
         this.body.onCollision = this.onCollision.bind(this);
         
         this.type = "PlayerBaseEntity";
+        
+        this.renderable.addAnimation("idle", [0]);
+        this.renderable.addAnimation("broken", [1]);
+        this.renderable.setCurrentAnimation("idle");
     },
 //    if the players health is lower then 0 then he dies
-    update:function(){
+    update:function(delta){
         if(this.health<=0){
             this.broken = true;
+            this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
         
@@ -108,15 +114,21 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.body.onCollision = this.onCollision.bind(this);
         
         this.type = "EnemyBaseEntity";
+        
+        this.renderable.addAnimation("idle", [0]);
+        this.renderable.addAnimation("broken", [1]);
+        this.renderable.setCurrentAnimation("idle");
     },
-    update:function(){
+    update:function(delta){
         if(this.health<=0){
             this.broken = true;
+            this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
         
         this._super(me.Entity, "update", [delta]);
         return true;
+    
     },
     
     onCollision: function(){
