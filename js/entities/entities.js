@@ -16,6 +16,9 @@ game.PlayerEntity = me.Entity.extend ({
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
             this.facing = "right";
+            this.now = new Date().getTime();
+            this.lastHit = this.now;
+            this.lastAttack = new Date().getTime();
 //            this follows the position of the character
             me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
             
@@ -29,6 +32,7 @@ game.PlayerEntity = me.Entity.extend ({
         
                     
             update: function(delta){
+                this.now = new Date().getTime();
             if(me.input.isKeyPressed("right")){
                 this.facing = "right";
 //                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
@@ -52,7 +56,7 @@ game.PlayerEntity = me.Entity.extend ({
             
             
 //                       if the a key is pressed then play attack animation 
-                    if(me.input.isKeyPressed("attack")){
+            if(me.input.isKeyPressed("attack")){
                 if(!this.renderable.isCurrentAnimation("attack")){
                     
 //                    sets the character animation to an attack one if using the a key
@@ -62,11 +66,11 @@ game.PlayerEntity = me.Entity.extend ({
                 }
             }
                 //            this sets it so that if the character isnt moving then it shows the idle animation
-                else if(this.body.vel.x !== 0){
+                else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")){
                     if(!this.renderable.isCurrentAnimation("walk")){
                         this.renderable.setCurrentAnimation("walk");
                     }
-        }else{
+        }else if(!this.renderable.isCurrentAnimation("attack")){
             this.renderable.setCurrentAnimation("idle");
         }
                 me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -97,6 +101,12 @@ game.PlayerEntity = me.Entity.extend ({
                     }else if(ydif<-40){
                         this.body.falling = false;
                         this.body.vel.y = -1;
+                    }
+//                    if its been more then 400 miliseconds then update the last hit timer
+                    if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000){
+                        
+                        this.lastHit = this.now;
+                        response.b.loseHealth();
                     }
                 }
             }
@@ -181,5 +191,8 @@ game.EnemyBaseEntity = me.Entity.extend({
     
     onCollision: function(){
         
+    },
+    loseHealth: function(){
+        this.health--;
     }
 });
