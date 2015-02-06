@@ -53,6 +53,7 @@ game.PlayerEntity = me.Entity.extend ({
             return true;
             }
 });
+//this is for the player base in tiled
 game.PlayerBaseEntity = me.Entity.extend({
     init : function(x, y, settings){
         this._super(me.Entity,'init', [x,y, {
@@ -65,6 +66,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                     return (new me.Rect(0, 0, 100, 100)).toPolygon();
                 }
         }]);
+//    these are variables that are used later
         this.broken = false;
         this.health = 10;
         this.alwaysUpdate = true;
@@ -72,6 +74,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         
         this.type = "PlayerBaseEntity";
     },
+//    if the players health is lower then 0 then he dies
     update:function(){
         if(this.health<=0){
             this.broken = true;
@@ -86,7 +89,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         
     }
 });
-
+//all the same as above except is enemies
 game.EnemyBaseEntity = me.Entity.extend({
     init : function(x, y, settings){
         this._super(me.Entity,'init', [x,y, {

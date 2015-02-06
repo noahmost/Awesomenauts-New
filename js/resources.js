@@ -9,6 +9,7 @@ game.resources = [
         {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
 //        this adds the player entity
         {name: "player", type: "image", src: "data/img/orcSpear.png"},
+//        this adds the tower entity
         {name: "tower", type: "image", src: "data/img/tower_round.svg.png"},
 	/* Atlases 
 	 * @example
