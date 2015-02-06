@@ -41,7 +41,7 @@ game.PlayerEntity = me.Entity.extend ({
             else{
                 this.body.vel.x=0;
             }
-            
+//            this allows me to jump and not double jump or jump when falling
             if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
                 this.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;

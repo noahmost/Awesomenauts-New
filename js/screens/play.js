@@ -13,6 +13,7 @@ game.PlayScreen = me.ScreenObject.extend({
 //                this binds the key to press so the champion moves around
                 me.input.bindKey(me.input.KEY.RIGHT, "right");
                 me.input.bindKey(me.input.KEY.LEFT, "left");
+//                bound key for jumping
                 me.input.bindKey(me.input.KEY.SPACE, "jump");
 //                this binds the a key to attack
                 me.input.bindKey(me.input.KEY.A, "attack");
