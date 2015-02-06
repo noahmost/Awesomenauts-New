@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend ({
                 }]);
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
+            this.facing = "right";
 //            this follows the position of the character
             me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
             
@@ -29,11 +30,13 @@ game.PlayerEntity = me.Entity.extend ({
                     
             update: function(delta){
             if(me.input.isKeyPressed("right")){
+                this.facing = "right";
 //                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
                     this.body.vel.x += this.body.accel.x * me.timer.tick;
 //                    this flips the character around
                     this.flipX(true);
             }else if(me.input.isKeyPressed("left")){
+                this.facing = "left";
                 this.body.vel.x -= this.body.accel.x * me.timer.tick;
 //                this flips the character around
                 this.flipX(false);
@@ -42,7 +45,7 @@ game.PlayerEntity = me.Entity.extend ({
                 this.body.vel.x=0;
             }
 //            this allows me to jump and not double jump or jump when falling
-            if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling){
+            if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
                 this.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;
             }
@@ -66,13 +69,35 @@ game.PlayerEntity = me.Entity.extend ({
         }else{
             this.renderable.setCurrentAnimation("idle");
         }
-                
+                me.collision.check(this, true, this.collideHandler.bind(this), true);
                 
                 this.body.update(delta);
             
             this._super(me.Entity, "update", [delta]);
             
             return true;
+            },
+            
+            collideHandler: function(response){
+                if(response.b.type==="EnemyBaseEntity"){
+                    var ydif = this.pos.y - response.b.pos.y;
+                    var xdif = this.pos.x - response.b.pos.x;
+                    
+                     if(ydif<-40 && xdif< 70 && xdif>-35){
+                        this.body.falling = false;
+                        this.body.vel.y = -1;
+                    }
+                    else if(xdif>-35 && this.facing === 'right' && (xdif<0) && ydif>-50){
+                        this.body.vel.x = 0;
+                        this.pos.x = this.pos.x -1;
+                    }else if(xdif<70 && this.facing ==='left' && (xdif>0)){
+                        this.body.vel.x = 0;
+                        this.pos.x = this.pos.x +1;
+                    }else if(ydif<-40){
+                        this.body.falling = false;
+                        this.body.vel.y = -1;
+                    }
+                }
             }
 });
 //this is for the player base in tiled
