@@ -20,6 +20,7 @@ game.PlayerEntity = me.Entity.extend ({
             
             this.renderable.addAnimation("idle", [78]);
             this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 123, 124, 125], 80);
+            this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
             
             this.renderable.setCurrentAnimation("idle");
             },
@@ -40,15 +41,26 @@ game.PlayerEntity = me.Entity.extend ({
             else{
                 this.body.vel.x=0;
             }
-//            this sets it so that if the character isnt moving then it shows the idle animation
-                if(this.body.vel.x !== 0){
+                        if(me.input.isKeyPressed("attack")){
+                if(!this.renderable.isCurrentAnimation("attack")){
+                    
+//                    sets the character animation to an attack one if using the a key
+                    this.renderable.setCurrentAnimation("attack", "idle");
+//                    makes it so when we start the sequence we begin from the first animation
+                        this.renderable.setAnimationFrame();
+                }
+            }
+                //            this sets it so that if the character isnt moving then it shows the idle animation
+                else if(this.body.vel.x !== 0){
                     if(!this.renderable.isCurrentAnimation("walk")){
                         this.renderable.setCurrentAnimation("walk");
                     }
         }else{
             this.renderable.setCurrentAnimation("idle");
         }
-            this.body.update(delta);
+                
+                
+                this.body.update(delta);
             
             this._super(me.Entity, "update", [delta]);
             
