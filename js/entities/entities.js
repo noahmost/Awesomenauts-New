@@ -41,7 +41,8 @@ game.PlayerEntity = me.Entity.extend ({
             else{
                 this.body.vel.x=0;
             }
-                        if(me.input.isKeyPressed("attack")){
+//                       if the a key is pressed then play attack animation 
+                    if(me.input.isKeyPressed("attack")){
                 if(!this.renderable.isCurrentAnimation("attack")){
                     
 //                    sets the character animation to an attack one if using the a key
