@@ -16,6 +16,7 @@ game.PlayerEntity = me.Entity.extend ({
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
             this.facing = "right";
+//            this updates the time and date of the hits
             this.now = new Date().getTime();
             this.lastHit = this.now;
             this.lastAttack = new Date().getTime();
@@ -192,6 +193,7 @@ game.EnemyBaseEntity = me.Entity.extend({
     onCollision: function(){
         
     },
+//    this sets it so the base loeses health
     loseHealth: function(){
         this.health--;
     }
