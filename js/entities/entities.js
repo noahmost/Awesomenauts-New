@@ -219,7 +219,7 @@ game.EnemyCreep = me.Entity.extend({
     
     this.type = "EnemyCreep";
 //    sets walk animation
-    this.renderable.addAnimation("walk" [3, 4, 5], 80);
+    this.renderable.addAnimation("walk", [3, 4, 5], 80);
     this.renderable.setCurrentAnimation("walk");
     },
     update: function(){
