@@ -10,9 +10,7 @@ game.PlayerEntity = me.Entity.extend ({
             getShape: function(){
                 return(new me.Rect(0, 0, 64, 64)).toPolygon();
             }
-            
-            
-                }]);
+             }]);
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
             this.facing = "right";
@@ -35,12 +33,14 @@ game.PlayerEntity = me.Entity.extend ({
             update: function(delta){
                 this.now = new Date().getTime();
             if(me.input.isKeyPressed("right")){
-                this.facing = "right";
+                
 //                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
                     this.body.vel.x += this.body.accel.x * me.timer.tick;
 //                    this flips the character around
                     this.flipX(true);
-            }else if(me.input.isKeyPressed("left")){
+                    this.facing = "right";
+            }
+            else if(me.input.isKeyPressed("left")){
                 this.facing = "left";
                 this.body.vel.x -= this.body.accel.x * me.timer.tick;
 //                this flips the character around
@@ -51,7 +51,7 @@ game.PlayerEntity = me.Entity.extend ({
             }
 //            this allows me to jump and not double jump or jump when falling
             if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
-                this.jumping = true;
+                this.body.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;
             }
             
@@ -71,7 +71,8 @@ game.PlayerEntity = me.Entity.extend ({
                     if(!this.renderable.isCurrentAnimation("walk")){
                         this.renderable.setCurrentAnimation("walk");
                     }
-        }else if(!this.renderable.isCurrentAnimation("attack")){
+        }
+        else if(!this.renderable.isCurrentAnimation("attack")){
             this.renderable.setCurrentAnimation("idle");
         }
                 me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -122,7 +123,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
+                    return (new me.Rect(0, 0, 70, 70)).toPolygon();
                 }
         }]);
 //    these are variables that are used later
@@ -163,7 +164,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return (new me.Rect(0, 0, 100, 70)).toPolygon();
+                    return (new me.Rect(0, 0, 70, 70)).toPolygon();
                 }
         }]);
         this.broken = false;
@@ -224,7 +225,7 @@ game.EnemyCreep = me.Entity.extend({
     update: function(){
         
     }
-});
+}); 
 //made entties gamemanager
 game.GameManager = Object.extend({
    init: function(x,y,settings){
