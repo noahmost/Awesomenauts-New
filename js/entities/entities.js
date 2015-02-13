@@ -11,6 +11,8 @@ game.PlayerEntity = me.Entity.extend ({
                 return(new me.Rect(0, 0, 64, 64)).toPolygon();
             }
              }]);
+         this.type = "PlayerEntity";
+         this.health = 20;
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
             this.facing = "right";
@@ -82,6 +84,10 @@ game.PlayerEntity = me.Entity.extend ({
             this._super(me.Entity, "update", [delta]);
             
             return true;
+            },
+            
+            loseHealth: function(damage){
+              this.health = this.health - damage;  
             },
             
             collideHandler: function(response){
@@ -256,6 +262,26 @@ game.EnemyCreep = me.Entity.extend({
             this.pos.x = this.pos.x + 1;
 //            checks that it has been 1 second since the creep hit the base
             if((this.now-this.lastHit >= 1000)){
+//                updates the last hit timer
+                this.lastHit = this.now;
+//                makes the playerbase call its losehealth function and have its health -1
+                response.b.loseHealth(1);
+            }
+        }else if (response.b.type==='PlayerEntity'){
+            var xdif = this.pos.x - response.b.pos.x;
+            
+            
+            this.attacking=true;
+//            this.lastAttacking = this.now;
+            
+
+            if(xdif>0){
+            this.pos.x = this.pos.x + 1;
+            //            keeps moving the creep to the right to maintain position
+            this.body.vel.x = 0;
+        }
+//            checks that it has been 1 second since the creep hit the base
+            if((this.now-this.lastHit >= 1000) && xdif>0){
 //                updates the last hit timer
                 this.lastHit = this.now;
 //                makes the playerbase call its losehealth function and have its health -1
