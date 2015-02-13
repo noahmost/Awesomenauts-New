@@ -12,6 +12,7 @@ game.PlayerEntity = me.Entity.extend ({
             }
              }]);
          this.type = "PlayerEntity";
+//         sets the health for the player
          this.health = 20;
 //            this sets the speed that the character is going
             this.body.setVelocity(10, 20);
