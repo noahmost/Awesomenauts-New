@@ -132,7 +132,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
         
-        this.type = "PlayerBaseEntity";
+        this.type = "PlayerBase";
         
         this.renderable.addAnimation("idle", [0]);
         this.renderable.addAnimation("broken", [1]);
@@ -148,6 +148,10 @@ game.PlayerBaseEntity = me.Entity.extend({
         
         this._super(me.Entity, "update", [delta]);
         return true;
+    },
+    
+    loseHealth: function(damage) {
+        this.health = this.health - damage;
     },
     
     onCollision: function(){
@@ -215,6 +219,13 @@ game.EnemyCreep = me.Entity.extend({
 //    this sets the health
     this.health =10;
     this.alwaysUpdate = true;
+//    this lets us know if the enemy is attacking or not
+    this.attacking = false;
+//    this is gonna shsow when the last time the creep attacked anything
+    this.lastAttacking = new Date().getTime();
+//    keeps track of when the crepe hit anything
+    this.lastHit = new Date().getTime();
+    this.now = new Date().getTime();
     this.body.setVelocity(3,20);
     
     this.type = "EnemyCreep";
@@ -223,17 +234,32 @@ game.EnemyCreep = me.Entity.extend({
     this.renderable.setCurrentAnimation("walk");
     },
     update: function(delta){
-        
+        this.now = new Date().getTime();
 //        sets this so the creep moves
         this.body.vel.x -= this.body.accel.x * me.timer.tick;
-//        this updates the body
+
+        me.collision.check(this, true, this.collideHandler.bind(this), true);
+        //        this updates the body
         this.body.update(delta);
         this._super(me.Entity, "update", [delta]);
         
         return true;
         
         
+    },
+    collideHandler: function(response) {
+        if(response.b.type==='PlayerBase'){
+            this.attacking=true;
+            this.lastAttacking = this.now;
+            this.body.vel.x = 0;
+            this.pos.x = this.pos.x + 1;
+            if((this.now-this.lastHit >= 1000)){
+                this.lastHit = this.now;
+                response.b.loseHealth(1);
+            }
+        }
     }
+    
 }); 
 //made entties gamemanager
 game.GameManager = Object.extend({
