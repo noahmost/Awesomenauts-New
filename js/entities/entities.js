@@ -111,10 +111,10 @@ game.PlayerEntity = me.Entity.extend ({
                         this.body.falling = false;
                         this.body.vel.y = -1;
                     }
-//                    if its been more then 400 miliseconds then update the last hit timer
+//                    if its been more then 400 miliseconds then update the last hit timer                                                                                  if facing right but character is left of creep i can attack it
                     if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 1000 && (Math.abs(ydif) <=40) && (((dxif>0) && this.facing === "left") || ((xdif<0) && this.facing==="right"))
                             ){
-                        
+//                        if the person attacks then the creep loses health
                         this.lastHit = this.now;
                         response.b.loseHealth();
                     }
