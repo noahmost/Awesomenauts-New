@@ -5,6 +5,7 @@ var game = {
 	// an object where to store game information
 	data : {
 		// score
+//                these are all variables that i can set in entites.js
 		score : 0,
                 EnemyBaseHealth: 10,
                 playerBaseHealth: 10,
