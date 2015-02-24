@@ -156,97 +156,9 @@ game.PlayerEntity = me.Entity.extend ({
             }
 });
 //this is for the player base in tiled
-game.PlayerBaseEntity = me.Entity.extend({
-    init : function(x, y, settings){
-        this._super(me.Entity,'init', [x,y, {
-                image: "tower",
-                width: 100,
-                height: 100,
-                spritewidth: "100",
-                spriteheight: "100",
-                getShape: function(){
-                    return (new me.Rect(0, 0, 70, 70)).toPolygon();
-                }
-        }]);
-//    these are variables that are used later
-        this.broken = false;
-//        sets health from variable in game.js
-        this.health = game.data.playerBaseHealth;
-        this.alwaysUpdate = true;
-        this.body.onCollision = this.onCollision.bind(this);
-        
-        this.type = "PlayerBase";
-        
-        this.renderable.addAnimation("idle", [0]);
-        this.renderable.addAnimation("broken", [1]);
-        this.renderable.setCurrentAnimation("idle");
-    },
-//    if the players health is lower then 0 then he dies
-    update:function(delta){
-        if(this.health<=0){
-            this.broken = true;
-            this.renderable.setCurrentAnimation("broken");
-        }
-        this.body.update(delta);
-        
-        this._super(me.Entity, "update", [delta]);
-        return true;
-    },
-    
-    loseHealth: function(damage) {
-        this.health = this.health - damage;
-    },
-    
-    onCollision: function(){
-        
-    }
-});
+
 //all the same as above except is enemies
-game.EnemyBaseEntity = me.Entity.extend({
-    init : function(x, y, settings){
-        this._super(me.Entity,'init', [x,y, {
-                image: "tower",
-                width: 100,
-                height: 100,
-                spritewidth: "100",
-                spriteheight: "100",
-                getShape: function(){
-                    return (new me.Rect(0, 0, 70, 70)).toPolygon();
-                }
-        }]);
-        this.broken = false;
-//        this sets the health that i have set from enemy base health
-        this.health = game.data.enemyBaseHealth;
-        this.alwaysUpdate = true;
-        this.body.onCollision = this.onCollision.bind(this);
-        
-        this.type = "EnemyBaseEntity";
-//        this sets the tower to not be burning
-        this.renderable.addAnimation("idle", [0]);
-        this.renderable.addAnimation("broken", [1]);
-        this.renderable.setCurrentAnimation("idle");
-    },
-    update:function(delta){
-//        if the tower is deaded then burn it
-        if(this.health<=0){
-            this.broken = true;
-            this.renderable.setCurrentAnimation("broken");
-        }
-        this.body.update(delta);
-        
-        this._super(me.Entity, "update", [delta]);
-        return true;
-    
-    },
-    
-    onCollision: function(){
-        
-    },
-//    this sets it so the base loeses health
-    loseHealth: function(){
-        this.health--;
-    }
-});
+
 
 game.EnemyCreep = me.Entity.extend({
     init: function(x,y,settings){
@@ -338,34 +250,3 @@ game.EnemyCreep = me.Entity.extend({
     }
     
 }); 
-//made entties gamemanager
-game.GameManager = Object.extend({
-   init: function(x,y,settings){
-     this.now = new Date().getTime();
-     this.lastCreep = new Date().getTime();
-     this.paused = false;
-     this.alwaysUpdate = true;
-   }, 
-    update: function(){
-        this.now = new Date().getTime();
-//        if player is dead execute these
-        if(game.data.player.dead) {
-            me.game.world.removeChild(game.data.player);
-            me.state.current().resetPlayer(10, 0);
-        }
-//        get gold passivley every 20 seconds
-        if(Math.round(this.now/1000)%20 ===0 && (this.now - this.lastCreep >= 1000)){
-            game.data.gold += 1;
-            
-        }
-        
-        
-        if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)){
-            this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
-            me.game.world.addChild(creepe,5);
-        }
-        return true;
-    }
-    
-});
