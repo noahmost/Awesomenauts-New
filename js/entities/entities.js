@@ -14,7 +14,7 @@ game.PlayerEntity = me.Entity.extend ({
             this.addAnimation();
             this.renderable.setCurrentAnimation("idle");
             },
-        
+//        pulled the setsuper statement into here
         setSuper: function(){
             this._super(me.Entity, "init", [x, y, {
             image: "player",
@@ -28,7 +28,7 @@ game.PlayerEntity = me.Entity.extend ({
             }
              }]);
         },
-        
+//        these are for things with date and getTime
         setPlayerTimers: function(){
             this.now = new Date().getTime();
             this.lastHit = this.now;
@@ -41,12 +41,12 @@ game.PlayerEntity = me.Entity.extend ({
             this.body.setVelocity(game.data.playerMoveSpeed, 20);
             this.attack = game.data.playerAttack;
         },
-        
+//        these concern the characters
         setFlags: function(){
         this.dead = false;
         this.facing = "right";
         },
-        
+//        these sets animations like walking
         addAnimation: function(){
             this.renderable.addAnimation("idle", [78]);
             this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 123, 124, 125], 80);
@@ -59,7 +59,6 @@ game.PlayerEntity = me.Entity.extend ({
                 
                 if (this.health <= 0) {
                     this.dead = true;
-                    
                 }
                 
             if(me.input.isKeyPressed("right")){
