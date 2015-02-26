@@ -91,14 +91,14 @@ game.PlayerEntity = me.Entity.extend ({
             
             return true;
             },
-            
+//            this function checks if the character is dead
             checkIfDead: function(){
                 if (this.health <= 0) {
                     return true;
                 }
                 return false;
             },
-            
+//            this checks if a key is pressed and if it is then it moves the character
             checkKeyPressesAndMove: function(){
             if(me.input.isKeyPressed("right")){
                 this.moveRight();
@@ -115,7 +115,7 @@ game.PlayerEntity = me.Entity.extend ({
                 this.jump();
             }
             },
-            
+//            moves right code
             moveRight: function(){
 //                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
                     this.body.vel.x += this.body.accel.x * me.timer.tick;
@@ -123,14 +123,14 @@ game.PlayerEntity = me.Entity.extend ({
                     this.flipX(true);
                     this.facing = "right";
             },
-            
+//            move left code
             moveLeft: function(){
                 this.facing = "left";
                 this.body.vel.x -= this.body.accel.x * me.timer.tick;
 //                this flips the character around
                 this.flipX(false);
             },
-            
+//            jumping code
             jump: function(){
                 this.body.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;
