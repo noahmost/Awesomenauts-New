@@ -57,32 +57,11 @@ game.PlayerEntity = me.Entity.extend ({
             update: function(delta){
                 this.now = new Date().getTime();
                 
-                if (this.health <= 0) {
-                    this.dead = true;
-                }
+                this.dead = checkIfDead();
                 
-            if(me.input.isKeyPressed("right")){
+                this.checkKeyPressedAndMove();
                 
-//                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
-                    this.body.vel.x += this.body.accel.x * me.timer.tick;
-//                    this flips the character around
-                    this.flipX(true);
-                    this.facing = "right";
-            }
-            else if(me.input.isKeyPressed("left")){
-                this.facing = "left";
-                this.body.vel.x -= this.body.accel.x * me.timer.tick;
-//                this flips the character around
-                this.flipX(false);
-            }
-            else{
-                this.body.vel.x=0;
-            }
-//            this allows me to jump and not double jump or jump when falling
-            if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
-                this.body.jumping = true;
-                this.body.vel.y -= this.body.accel.y * me.timer.tick;
-            }
+            
             
             
 //                       if the a key is pressed then play attack animation 
@@ -111,6 +90,50 @@ game.PlayerEntity = me.Entity.extend ({
             this._super(me.Entity, "update", [delta]);
             
             return true;
+            },
+            
+            checkIfDead: function(){
+                if (this.health <= 0) {
+                    return true;
+                }
+                return false;
+            },
+            
+            checkKeyPressesAndMove: function(){
+            if(me.input.isKeyPressed("right")){
+                this.moveRight();
+
+            }
+            else if(me.input.isKeyPressed("left")){
+                this.moveLeft();
+            }
+            else{
+                this.body.vel.x=0;
+            }
+//            this allows me to jump and not double jump or jump when falling
+            if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling){
+                this.jump();
+            }
+            },
+            
+            moveRight: function(){
+//                velocity represents our current position, sets position of x by multiplying velocity by me.timer.tick
+                    this.body.vel.x += this.body.accel.x * me.timer.tick;
+//                    this flips the character around
+                    this.flipX(true);
+                    this.facing = "right";
+            },
+            
+            moveLeft: function(){
+                this.facing = "left";
+                this.body.vel.x -= this.body.accel.x * me.timer.tick;
+//                this flips the character around
+                this.flipX(false);
+            },
+            
+            jump: function(){
+                this.body.jumping = true;
+                this.body.vel.y -= this.body.accel.y * me.timer.tick;
             },
             
             loseHealth: function(damage){
