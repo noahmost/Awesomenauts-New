@@ -148,7 +148,14 @@ game.PlayerEntity = me.Entity.extend ({
             
             collideHandler: function(response){
                 if(response.b.type==="EnemyBaseEntity"){
-                    var ydif = this.pos.y - response.b.pos.y;
+                    this.collideWithEnemyBase(response);
+                }else if(response.b.type ==='EnemyCreep'){
+                    this.collideWithEnemyCreep(response);
+                }
+            },
+            
+            collideWithEnemyBase: function(response){
+                var ydif = this.pos.y - response.b.pos.y;
                     var xdif = this.pos.x - response.b.pos.x;
                     
                      if(ydif<-40 && xdif< 70 && xdif>-35){
@@ -166,6 +173,7 @@ game.PlayerEntity = me.Entity.extend ({
                         this.body.falling = false;
 //                        this.body.vel.y = -1;
                     }
+                    
 //                    if its been more then 400 miliseconds then update the last hit timer                                                                                  if facing right but character is left of creep i can attack it
                     if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer && (Math.abs(ydif) <=40) && (((dxif>0) && this.facing === "left") || ((xdif<0) && this.facing==="right"))
                             ){
@@ -173,11 +181,21 @@ game.PlayerEntity = me.Entity.extend ({
                         this.lastHit = this.now;
                         response.b.loseHealth(game.data.playerAttack);
                     }
-                }else if(response.b.type ==='EnemyCreep'){
+            },
+            
+            collideWithEnemyCreep: function(response){
+                
                     var xdif = this.pos.x - response.b.pos.x;
                     var ydif = this.pos.y - response.b.pos.y;
                     
-                    if(xdif>0){
+                    this.stopMovement(xdif);
+                    
+                    if(this.checkAttack(xdif, ydif)){
+                        this.hitCreep(response);
+                    };
+            },
+            stopMovement: function(xdif){
+                if(xdif>0){
                         this.pos.x = this.pos.x + 1;
                         if(this.facing==="left"){
                             this.body.vel.x = 0;
@@ -188,18 +206,24 @@ game.PlayerEntity = me.Entity.extend ({
                             this.body.vel.x = 0;
                         }
                     }
-                    
-                    if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer){
+            },
+            
+            checkAttack: function(xdif, ydif){
+                if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer){
                         this.lastHit = this.now;
 //                        if the creeps health is lower than the attack, execute code in if statement
-                        if(response.b.health <= game.data.playerAttack){
+                        return true;
+                    }
+                    return false;
+            },
+            
+            hitCreep: function(response){
+                if(response.b.health <= game.data.playerAttack){
 //                            adds one gold for creep kill
                             game.data.gold += 1;
                         }
                         
                         response.b.loseHealth(game.data.playerAttack);
-                    }
-                }
             }
 });
 //this is for the player base in tiled
