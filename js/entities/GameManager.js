@@ -51,13 +51,22 @@ game.ExperienceCardinal = Object.extend({
     update: function(){
 //        if you win the game then gain 10 exp; if this is true game is over
         if(game.data.win === true && !this.gameOver){
-            game.data.exp += 10;
+            this.gameOver(true);
 //            if you dont win then you only get 1 xp; if this is true then game is over
         }else if(game.data.win === false && this.gameOver){
-            game.data.exp += 1;
-            this.gameOver = true;
+            this.gameOver(false);
         }
         console.log(game.data.exp);
         return true;
-    }
+    },
+    
+    gameOver: function(win){
+        if(win){
+            game.data.exp += 10;
+        }else{
+            game.data.exp += 1;
+        }
+        this.gameOver = true;
+        me.save.exp = game.data.exp;
+    },
 });
