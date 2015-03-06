@@ -16,6 +16,9 @@ game.PlayScreen = me.ScreenObject.extend({
                 var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
                 me.game.world.addChild(heroDeathManager, 0);
                 
+                var experienceCardinal = me.pool.pull("ExperienceCardinal", 0, 0, {});
+                me.game.world.addChild(experienceCardinal, 0);
+                
 //                this binds the key to press so the champion moves around
                 me.input.bindKey(me.input.KEY.RIGHT, "right");
                 me.input.bindKey(me.input.KEY.LEFT, "left");

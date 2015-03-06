@@ -26,6 +26,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 //        if the tower is deaded then burn it
         if(this.health<=0){
             this.broken = true;
+            game.data.win = true;
             this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
