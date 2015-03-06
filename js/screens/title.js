@@ -24,11 +24,13 @@ game.TitleScreen = me.ScreenObject.extend({
                     },
                     newGame: function(){
                         me.input.releasePointerEvent('pointerdown', this);
+//                        remove all of the xp for these variables
                         me.save.remove('exp');
                         me.save.remove('exp1');
                         me.save.remove('exp2');
                         me.save.remove('exp3');
                         me.save.remove('exp4');
+//                        go to the play screen
                         me.state.change(me.state.PLAY);
                     }
                 })));
