@@ -59,10 +59,12 @@ game.ExperienceCardinal = Object.extend({
         console.log(game.data.exp);
         return true;
     },
-    
+//    refactored code in update function here
     gameOver: function(win){
+//        if you win then get 10 xp
         if(win){
             game.data.exp += 10;
+//            if loss then only gain 1 exp
         }else{
             game.data.exp += 1;
         }
