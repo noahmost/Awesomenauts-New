@@ -34,7 +34,28 @@ game.TitleScreen = me.ScreenObject.extend({
                         me.state.change(me.state.PLAY);
                     }
                 })));
-                
+                me.game.world.addChild(new (me.Renderable.extend({
+                    
+                    init: function(){
+//                        this adds the text to the title screen
+                        this._super(me.Renderable, 'init', [380, 340, 250, 50]);
+//                        this sets the font and color of the font on the title screen
+                        this.font = new me.Font("Arial", 46, "white");
+                        me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
+                    },
+//                    this is the text displayed on the screen
+                    draw: function(renderer){
+                        this.font.draw(renderer.getContext(), "Continue", this.pos.x, this.pos.y);
+                    },
+                    update: function(dt){
+                        return true;
+                    },
+                    newGame: function(){
+                        me.input.releasePointerEvent('pointerdown', this);
+//                        go to the play screen
+                        me.state.change(me.state.PLAY);
+                    }
+                })));
 	},
 	
 	
