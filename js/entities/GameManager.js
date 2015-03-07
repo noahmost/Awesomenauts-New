@@ -46,14 +46,14 @@ game.HeroDeathManager = Object.extend({
 game.ExperienceCardinal = Object.extend({
     init: function(x, y, settings){
         this.alwaysUpdate = true;
-        this.gameOver = true;
+        this.gameover = true;
     },
     update: function(){
 //        if you win the game then gain 10 exp; if this is true game is over
-        if(game.data.win === true && !this.gameOver){
+        if(game.data.win === true && !this.gameover){
             this.gameOver(true);
 //            if you dont win then you only get 1 xp; if this is true then game is over
-        }else if(game.data.win === false && this.gameOver){
+        }else if(game.data.win === false && this.gameover){
             this.gameOver(false);
         }
         console.log(game.data.exp);
@@ -68,7 +68,8 @@ game.ExperienceCardinal = Object.extend({
         }else{
             game.data.exp += 1;
         }
-        this.gameOver = true;
+        this.gameover = true;
         me.save.exp = game.data.exp;
+        me.save.exp2 = 4;
     },
 });
