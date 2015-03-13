@@ -16,7 +16,7 @@ game.SpendExp = me.ScreenObject.extend({
                     },
 //                    this is the text displayed on the screen
                     draw: function(renderer){
-                        these all edit text and text placements
+//                        these all edit text and text placements
                         this.font.draw(renderer.getContext(), "Press F1- F4 to buy, f5 to skip", this.pos.x, this.pos.y);
                         this.font.draw(renderer.getContext(), "Current EXP: " + game.data.exp.toString(), this.pos.x + 100, this.pos.y + 50);
                         this.font.draw(renderer.getContext(), "F1: Increase gold production " + game.data.exp.toString(), this.pos.x + 100, this.pos.y + 100);
