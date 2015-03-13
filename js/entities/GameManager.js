@@ -99,19 +99,25 @@ game.SpendGold = Object.extend({
     },
     startBuying: function(){
         this.buying = true;
+//        this pauses the game
         me.state.pause(me.state.PLAY);
         game.data.pausePos = me.game.viewport.localToWorld(0, 0);
+//        when paused go to gold-screen image
         game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('gold-screen'));
         game.data.buyscreen.updateWhenPaused = true;
+//        have the opacity of the image screen at 0.8
         game.data.buyscreen.setOpacity(0.8);
         me.game.world.addChild(game.data.buyscreen, 34);
+//        player cant move when pause screen is up
         game.data.player.body.setVelocity(0, 0);
     },
     
     stopBuying: function(){
         this.buying = false;
+//        this resumes the game
         me.state.resume(me.state.PLAY);
         game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
+//        this removes the pause screen
         me.game.world.removeChild(game.data.buyscreen);
     }
 });
