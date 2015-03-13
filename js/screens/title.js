@@ -51,15 +51,15 @@ game.TitleScreen = me.ScreenObject.extend({
                         return true;
                     },
                     newGame: function(){
-                        game.data.save.exp = me.save.exp;
-                        game.data.save.exp = me.save.exp1;
-                        game.data.save.exp = me.save.exp2;
-                        game.data.save.exp = me.save.exp3;
-                        game.data.save.exp = me.save.exp4;
+                        game.data.exp = me.save.exp;
+                        game.data.exp = me.save.exp1;
+                        game.data.exp = me.save.exp2;
+                        game.data.exp = me.save.exp3;
+                        game.data.exp = me.save.exp4;
                         
                         me.input.releasePointerEvent('pointerdown', this);
 //                        go to the play screen
-                        me.state.change(me.state.PLAY);
+                        me.state.change(me.state.SPENDEXP);
                     }
                 })));
 	},
