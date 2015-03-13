@@ -5,7 +5,7 @@ game.SpendExp = me.ScreenObject.extend({
 	onResetEvent: function() {	
 //            puts title screen up
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('exp-screen')), -10); // TODO
-                
+//                these bind all of the f keys we have so they work when you push them
                 me.input.bindKey(me.input.KEY.F1, "F1");
                 me.input.bindKey(me.input.KEY.F2, "F2");
                 me.input.bindKey(me.input.KEY.F3, "F3");
@@ -32,7 +32,7 @@ game.SpendExp = me.ScreenObject.extend({
                     }
                    
                 })));
-               
+//               these are for which key you push
                this.handler = me.event.subscribe(me.event.KEYDOWN, function(action, keyCode, edge){
                    if(action === "F1"){
                        if(game.data.exp >= 10){
@@ -57,6 +57,7 @@ game.SpendExp = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
+//            this all unbinds/subscribes from all of the things we originally did
                 me.input.unbindKey(me.input.KEY.F1, "F1");
                 me.input.unbindKey(me.input.KEY.F2, "F2");
                 me.input.unbindKey(me.input.KEY.F3, "F3");
