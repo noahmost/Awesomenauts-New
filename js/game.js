@@ -78,6 +78,7 @@ var game = {
                 me.pool.register("GameTimerManager", game.GameTimerManager);
                 me.pool.register("HeroDeathManager", game.HeroDeathManager);
                 me.pool.register("ExperienceCardinal", game.ExperienceCardinal);
+//                built spendgold manager
                 me.pool.register("SpendGold", gaame.SpendGold);
                 
 		me.state.set(me.state.MENU, new game.TitleScreen());

@@ -77,6 +77,7 @@ game.ExperienceCardinal = Object.extend({
 game.SpendGold = Object.extend({
     init: function(x, y, settings){
      this.now = new Date().getTime();
+//     this shows the last time someone opened the buy screen so it doesnt just flicker
      this.lastBuy = new Date().getTime();
      this.paused = false;
      this.alwaysUpdate = true;

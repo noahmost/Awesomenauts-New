@@ -18,7 +18,7 @@ game.PlayScreen = me.ScreenObject.extend({
                 
                 var experienceCardinal = me.pool.pull("ExperienceCardinal", 0, 0, {});
                 me.game.world.addChild(experienceCardinal, 0);
-                
+//                built the variable spendgold
                 var spendGold = me.pool.pull("SpendGold", 0, 0, {});
                 me.game.world.addChild(spendGold, 0);
                 
