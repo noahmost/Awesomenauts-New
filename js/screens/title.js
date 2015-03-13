@@ -30,6 +30,7 @@ game.TitleScreen = me.ScreenObject.extend({
                         me.save.remove('exp2');
                         me.save.remove('exp3');
                         me.save.remove('exp4');
+//                        this has the xp save when you refresh
                         me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
 //                        go to the play screen
                         me.state.change(me.state.PLAY);
