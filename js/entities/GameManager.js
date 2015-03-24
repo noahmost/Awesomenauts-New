@@ -110,6 +110,37 @@ game.SpendGold = Object.extend({
         me.game.world.addChild(game.data.buyscreen, 34);
 //        player cant move when pause screen is up
         game.data.player.body.setVelocity(0, 0);
+        me.input.bindKey(me.input.KEY.F1, "F1", true);
+        me.input.bindKey(me.input.KEY.F2, "F2", true);
+        me.input.bindKey(me.input.KEY.F3, "F3", true);
+        me.input.bindKey(me.input.KEY.F4, "F4", true);
+        me.input.bindKey(me.input.KEY.F5, "F5", true);
+        me.input.bindKey(me.input.KEY.F6, "F6", true);
+        this.setBuyText();
+        
+    },
+    
+    setBuyText: function(){
+        me.game.world.addChild(new (me.Renderable.extend({
+                    
+                    init: function(){
+//                        this adds the text to the title screen
+                        this._super(me.Renderable, 'init', [10, 10, 300, 50]);
+//                        this sets the font and color of the font on the title screen
+                        this.font = new me.Font("Arial", 26, "white");
+                    },
+//                    this is the text displayed on the screen
+                    draw: function(renderer){
+//                        these all edit text and text placements
+                        this.font.draw(renderer.getContext(), "Press F1- F4 to buy, f5 to skip", this.pos.x, this.pos.y);
+                        this.font.draw(renderer.getContext(), "Current EXP: ", this.pos.x, this.pos.y + 50);
+                        this.font.draw(renderer.getContext(), "F1: Increase gold production CUrrent level" + game.data.exp1.toString() + "COST: " + exp1cost, this.pos.x, this.pos.y + 100);
+                        this.font.draw(renderer.getContext(), "F2:Add starting gold", this.pos.x, this.pos.y + 150);
+                        this.font.draw(renderer.getContext(), "f3: increase dmg ", this.pos.x, this.pos.y + 200);
+                        this.font.draw(renderer.getContext(), "f4: increase health ", this.pos.x, this.pos.y + 250);
+                    }
+                   
+                })));
     },
     
     stopBuying: function(){
@@ -119,5 +150,11 @@ game.SpendGold = Object.extend({
         game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
 //        this removes the pause screen
         me.game.world.removeChild(game.data.buyscreen);
+        me.input.unbindKey(me.input.KEY.F1, "F1", true);
+        me.input.unbindKey(me.input.KEY.F2, "F2", true);
+        me.input.unbindKey(me.input.KEY.F3, "F3", true);
+        me.input.unbindKey(me.input.KEY.F4, "F4", true);
+        me.input.unbindKey(me.input.KEY.F5, "F5", true);
+        me.input.unbindKey(me.input.KEY.F6, "F6", true);
     }
 });
