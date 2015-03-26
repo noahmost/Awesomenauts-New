@@ -110,6 +110,7 @@ game.SpendGold = Object.extend({
         me.game.world.addChild(game.data.buyscreen, 34);
 //        player cant move when pause screen is up
         game.data.player.body.setVelocity(0, 0);
+//        binded keys for the buy menu F1-F6
         me.input.bindKey(me.input.KEY.F1, "F1", true);
         me.input.bindKey(me.input.KEY.F2, "F2", true);
         me.input.bindKey(me.input.KEY.F3, "F3", true);
@@ -148,12 +149,14 @@ game.SpendGold = Object.extend({
         game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
 //        this removes the pause screen
         me.game.world.removeChild(game.data.buyscreen);
+//        unbinds the keys
         me.input.unbindKey(me.input.KEY.F1, "F1", true);
         me.input.unbindKey(me.input.KEY.F2, "F2", true);
         me.input.unbindKey(me.input.KEY.F3, "F3", true);
         me.input.unbindKey(me.input.KEY.F4, "F4", true);
         me.input.unbindKey(me.input.KEY.F5, "F5", true);
         me.input.unbindKey(me.input.KEY.F6, "F6", true);
+//        removes the buy text pause screen
         me.game.world.removeChild(game.data.buytext);
     }
 });
