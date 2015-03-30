@@ -198,6 +198,7 @@ game.SpendGold = Object.extend({
     },
     
     checkCost: function(skill){
+//        edits skills
         if(skill===1 && (game.data.gold >= ((game.data.skill1+1)*10))){
             return true;
         }else if(skill===2 && (game.data.gold >= ((game.data.skill2+1)*10))){
@@ -216,6 +217,7 @@ game.SpendGold = Object.extend({
     },
     
     makePurchase: function(skill){
+//        edits skills
         if(skill === 1){
             game.data.gold -= ((game.data.skill1 + 1)*10);
             game.data.skill1 += 1;
