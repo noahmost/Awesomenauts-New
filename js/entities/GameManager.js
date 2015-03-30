@@ -135,7 +135,13 @@ game.SpendGold = Object.extend({
 //                    this is the text displayed on the screen
                     draw: function(renderer){
 //                        these all edit text and text placements
-                        this.font.draw(renderer.getContext(), "Press F1- F6 to buy, B to skip", this.pos.x, this.pos.y);
+                        this.font.draw(renderer.getContext(), "Press F1- F6 to buy, B to skip. current gold" + game.data.gold, this.pos.x, this.pos.y);
+                        this.font.draw(renderer.getContext(), " Dmg increase C" + game.data.skill1 + "Cost" + ((game.data.exp1+1) * 10), this.pos.x, this.pos.y + 40);
+                        this.font.draw(renderer.getContext(), "Run fast "  + game.data.skill2 + "Cost" + ((game.data.exp2+1) * 10), this.pos.x, this.pos.y + 80);
+                        this.font.draw(renderer.getContext(), " health increase"  + game.data.skill3 + "Cost" + ((game.data.exp3+1) * 10), this.pos.x, this.pos.y + 120);
+                        this.font.draw(renderer.getContext(), " Q"  + game.data.ability1 + "Cost" + ((game.data.exp4+1) * 10), this.pos.x, this.pos.y + 160);
+                        this.font.draw(renderer.getContext(), " W"  + game.data.ability2 + "Cost" + ((game.data.exp5+1) * 10), this.pos.x, this.pos.y + 200);
+                        this.font.draw(renderer.getContext(), " E"  + game.data.ability3 + "Cost" + ((game.data.exp6+1) * 10), this.pos.x, this.pos.y + 240);
                     }
                    
                 }));
