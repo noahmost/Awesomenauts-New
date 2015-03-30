@@ -94,6 +94,7 @@ var game = {
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 //                this goes to the exp screen
                 me.state.set(me.state.SPENDEXP, new game.SpendExp());
+//                loads the screens
                 me.state.set(me.state.LOAD, new game.LoadProfile());
                 me.state.set(me.state.NEW, new game.NewProfile());
 
