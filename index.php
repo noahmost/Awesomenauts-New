@@ -15,7 +15,7 @@
 	<body>
 		<!-- Canvas placeholder -->
 		<div id="screen"></div>
-
+                        <!--html for buttons and text-->
                 <form id="input" method ="post">
                     <div class="field">
                         <label for="username">USername</label>

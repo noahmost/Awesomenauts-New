@@ -31,7 +31,7 @@ body {
 	image-rendering: optimize-contrast;
 	-ms-interpolation-mode: nearest-neighbor;
 }
-
+/*configured classes for html statements*/
 #input{
     display: block;
     text-align: center;
