@@ -92,12 +92,15 @@
 		</script>
                 
                 <script>
+//                    sends you back to the main menu
                 $("#mainmenu").bind("click", function(){
                    me.state.change(me.state.MENU); 
                 });
+//                sends you into the game
                 $("#register").bind("click", function(){
                    $.ajax({
                        type: "POST",
+//                       sends info to here
                        url: "php/controller/create-user.php",
                        data: {
                            username: $('#username').val(),
@@ -108,8 +111,10 @@
 //                   if successful execute this
                            .success(function(response){
                                if(response ==="true"){
+//                                   if it is successful then change it to the play screen
                                    me.state.change(me.state.PLAY);
                                }else{
+//                                   if not print an alert
                                    alert(response);
                                }
                            })
@@ -118,10 +123,10 @@
                                alert("Fail");
                            });
                 });
-                $("#register").bind("click", function(){
+                $("#load").bind("click", function(){
                    $.ajax({
                        type: "POST",
-                       url: "php/controller/create-user.php",
+                       url: "php/controller/login-user.php",
                        data: {
                            username: $('#username').val(),
                            password: $('#password').val()
