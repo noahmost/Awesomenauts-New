@@ -5,6 +5,8 @@ game.NewProfile = me.ScreenObject.extend({
 	onResetEvent: function() {	
 //            puts title screen up
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('new-screen')), -10); // TODO
+                document.getElementById("input").style.visibility = "visible";
+                document.getElementById("register").style.visibility = "visible";
 //                these bind all of the f keys we have so they work when you push them
                 me.input.bindKey(me.input.KEY.B);
                 me.input.bindKey(me.input.KEY.Q);
@@ -34,6 +36,8 @@ game.NewProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
+            document.getElementById("input").style.visibility = "hidden";
+            document.getElementById("register").style.visibility = "hidden";
 	}
 });
 
