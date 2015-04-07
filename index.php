@@ -65,6 +65,7 @@
                 <script type="text/javascript" src="js/screens/loadProfile.js"></script>
                 <script type="text/javascript" src="js/screens/newProfile.js"></script>
                 <script type="text/javascript" src="js/entities/MiniMap.js"></script>
+                <script type="text/javascript" src="js/entities/MiniPlayerLocation.js"></script>
 		<!-- /build -->
 		<!-- Bootstrap & Mobile optimization tricks -->
 		<script type="text/javascript">
