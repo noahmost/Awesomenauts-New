@@ -5,8 +5,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	onResetEvent: function() {	
 //            puts title screen up
 		me.game.world.addChild(new me.Sprite(0, 0, me.loader.getImage('title-screen')), -10); // TODO
-                
-                me.game.world.addChild(new (me.Renderable.extend({
+                game.data.option1 = new (me.Renderable.extend({
                     
                     init: function(){
 //                        this adds the text to the title screen
@@ -27,8 +26,8 @@ game.TitleScreen = me.ScreenObject.extend({
 //                        go to the new screen
                         me.state.change(me.state.NEW);
                     }
-                })));
-                me.game.world.addChild(new (me.Renderable.extend({
+                }));
+                game.data.option2 = new (me.Renderable.extend({
                     
                     init: function(){
 //                        this adds the text to the title screen
@@ -50,7 +49,10 @@ game.TitleScreen = me.ScreenObject.extend({
 //                        go to the load screen
                         me.state.change(me.state.LOAD);
                     }
-                })));
+                }));
+                
+                me.game.world.addChild(game.data.option2);
+                
 	},
 	
 	

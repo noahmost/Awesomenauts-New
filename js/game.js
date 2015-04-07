@@ -8,6 +8,8 @@ var game = {
 //                these are all variables that i can set in entites.js
 //edited values
 		score : 0,
+                option1: "",
+                option2: "",
                 EnemyBaseHealth: 10,
                 playerBaseHealth: 10,
                 enemyCreepHealth: 10,
