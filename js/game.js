@@ -20,6 +20,7 @@ var game = {
                 creepMoveSpeed: 8,
                 gameTimerManager: "",
                 heroDeathManager: "",
+                spearTimer: 1,
                 player: "",
                 exp: 0,
                 gold: 0,
@@ -88,6 +89,7 @@ var game = {
                 me.pool.register("ExperienceCardinal", game.ExperienceCardinal);
 //                built spendgold manager
                 me.pool.register("SpendGold", game.SpendGold);
+                me.pool.register("spear", game.SpearThrow);
                 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

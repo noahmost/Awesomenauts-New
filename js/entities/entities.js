@@ -32,6 +32,7 @@ game.PlayerEntity = me.Entity.extend ({
         setPlayerTimers: function(){
             this.now = new Date().getTime();
             this.lastHit = this.now;
+            this.lastSpear = this.now;
             this.lastAttack = new Date().getTime();
         },
 //        attributes are like the characters characteristics
@@ -62,7 +63,7 @@ game.PlayerEntity = me.Entity.extend ({
                 
                 this.checkKeyPressesAndMove();
                 
-            
+                this.checkAbilityKeys();
             
             
                 this.setAnimation();
@@ -119,6 +120,25 @@ game.PlayerEntity = me.Entity.extend ({
                 this.body.jumping = true;
                 this.body.vel.y -= this.body.accel.y * me.timer.tick;
             },
+            
+            checkAbilityKeys: function(){
+                if(me.input.isKeyPressed("skill1")){
+//                    this.speedBurst();
+                }else if(me.input.isKeyPressed("skill2")){
+//                    this.eatCreep();
+                }else if(me.input.isKeyPressed("skill3")){
+                    this.throwSpear();
+                }
+            },
+            
+            throwSpear: function(){
+                if(this.lastSpear >= game.data.spearTimer && game.data.ability3 >= 0){
+              this.lastSpear = this.now;
+            var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+            me.game.world.addChild(spear, 20);  
+        }
+            },
+            
 //            this is the attack animations
             setAnimation: function(){
                 //                       if the a key is pressed then play attack animation 
