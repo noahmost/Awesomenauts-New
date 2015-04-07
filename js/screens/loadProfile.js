@@ -38,8 +38,8 @@ game.LoadProfile = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
 //            getting rid of the code above
-            document.getElementById("input").style.visibility = "visible";
-            document.getElementById("load").style.visibility = "visible";
+            document.getElementById("input").style.visibility = "hidden";
+            document.getElementById("load").style.visibility = "hidden";
 	}
 });
 
